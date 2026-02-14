@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  dbnotification:
+    image: postgres:16
+    container_name: notification-db
+    environment:
+      POSTGRES_DB: notification_api
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12243648
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata-notification:/var/lib/postgresql/data
+    networks:
+      - ms-shared
+
+  apinotification:
+    build: .
+    container_name: notification-api
+    depends_on:
+      - dbnotification
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dbnotification:5432/notification_api
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12243648
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    ports:
+      - "8081:8080"
+    networks:
+      - ms-shared
+
+volumes:
+  pgdata-notification:
+
+networks:
+  ms-shared:
+    external: true
