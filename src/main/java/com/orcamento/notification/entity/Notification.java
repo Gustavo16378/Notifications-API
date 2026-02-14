@@ -41,7 +41,7 @@ public class Notification {
     private String bodyHtml;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(columnDefinition = "notification_status")
     private NotificationStatus status;
 
     @Column(name = "error_message", columnDefinition = "text")
@@ -71,7 +71,6 @@ public class Notification {
         this.status = status;
     }
 
-
     public UUID getId() {
         return id;
     }
@@ -79,7 +78,7 @@ public class Notification {
     public UUID getExternalReferenceId() {
         return externalReferenceId;
     }
-    
+
     public void setExternalReferenceId(UUID externalReferenceId) {
         this.externalReferenceId = externalReferenceId;
     }
