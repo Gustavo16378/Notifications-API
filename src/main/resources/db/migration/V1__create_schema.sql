@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS notification (
     body_html text NOT NULL,
     
     -- Situação da notificação
-    status notification_status NOT NULL DEFAULT 'PENDING',
+    status VARCHAR(30) NOT NULL DEFAULT 'PENDING',
     
     -- Debug de erro (opcional)
     error_message text NULL,

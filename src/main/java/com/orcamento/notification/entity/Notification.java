@@ -40,8 +40,9 @@ public class Notification {
     @Column(name = "body_html", nullable = false, columnDefinition = "text")
     private String bodyHtml;
 
+    // AJUSTE CRÍTICO AQUI! Remova o columnDefinition
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status", nullable = false, length = 30)
     private NotificationStatus status;
 
     @Column(name = "error_message", columnDefinition = "text")
@@ -71,7 +72,6 @@ public class Notification {
         this.status = status;
     }
 
-
     public UUID getId() {
         return id;
     }
@@ -79,7 +79,7 @@ public class Notification {
     public UUID getExternalReferenceId() {
         return externalReferenceId;
     }
-    
+
     public void setExternalReferenceId(UUID externalReferenceId) {
         this.externalReferenceId = externalReferenceId;
     }
@@ -155,5 +155,4 @@ public class Notification {
     public void setDeletedAt(OffsetDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
-
 }

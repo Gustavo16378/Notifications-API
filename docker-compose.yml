@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   dbnotification:
     image: postgres:16
@@ -20,10 +21,10 @@ services:
     depends_on:
       - dbnotification
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://dbnotification:5432/notification_api
+      SPRING_DATASOURCE_URL: jdbc:postgresql://notification-db:5432/notification_api
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 12243648
-      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_HOST: orcamento-rabbitmq
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
