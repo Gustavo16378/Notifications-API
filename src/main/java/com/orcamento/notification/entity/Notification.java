@@ -44,8 +44,8 @@ public class Notification {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 30)
     private NotificationStatus status;
-
     @Column(name = "error_message", columnDefinition = "text")
+
     private String errorMessage;
 
     @CreationTimestamp
