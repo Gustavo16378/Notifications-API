@@ -23,7 +23,19 @@ public class NotificationConsumer {
     public void receive(NotificationEventDTO event) {
         System.out.println("Mensagem recebida do RabbitMQ: " + event);
 
-        // Converter DTO em entity
+        // Se quiser montar o HTML aqui:
+        // String bodyHtml;
+        // if (event.getTemplateType() != null) {
+        //     String templateFile = "templates/" + event.getTemplateType().toLowerCase() + ".html";
+        //     bodyHtml = TemplateUtils.processTemplate(
+        //         templateFile,
+        //         event.getRecipientName(),
+        //         ...
+        //     );
+        // } else {
+        //     bodyHtml = event.getBodyHtml();
+        // }
+
         Notification notification = new Notification();
         notification.setExternalReferenceId(event.getExternalReferenceId());
         notification.setRecipientEmail(event.getRecipientEmail());
@@ -32,10 +44,8 @@ public class NotificationConsumer {
         notification.setBodyHtml(event.getBodyHtml());
         notification.setStatus(NotificationStatus.PENDING);
 
-        // Salvar no banco
         notification = notificationRepository.save(notification);
 
-        // Enviar e-mail e atualizar status
         emailNotificationService.send(notification);
     }
 }
